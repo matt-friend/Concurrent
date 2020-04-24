@@ -1,0 +1,6 @@
+#ifndef __DINING_PHILIOSOPHERS_H
+#define __DINING_PHILIOSOPHERS_H
+
+#define PHILOSPHERS 16
+
+#endif
