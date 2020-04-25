@@ -43,6 +43,8 @@
 #define MAX_PROCS 9
 #define PRIORITY_LEVELS 3
 
+extern uint32_t p_stack_space;
+
 typedef int pid_t;
 typedef int prty_t;
 
@@ -84,7 +86,6 @@ typedef struct {
 	int queueTime[PRIORITY_LEVELS];
 	int timeCount;
 } mlf_queues;
-
 
 
 #endif

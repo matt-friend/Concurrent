@@ -1,0 +1,16 @@
+Hardware assisted breakpoint 1 at 0x70011714: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdlib/malloc.c, line 215.
+Type commands for breakpoint(s) 1, one per line.
+End with a line saying just "end".
+Hardware assisted breakpoint 2 at 0x700117d3: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdlib/mallocr.c, line 2398.
+Type commands for breakpoint(s) 2, one per line.
+End with a line saying just "end".
+Hardware assisted breakpoint 3 at 0x70011728: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdlib/malloc.c, line 222.
+Type commands for breakpoint(s) 3, one per line.
+End with a line saying just "end".
+Continuing.
+
+Breakpoint 1, malloc (nbytes=8) at /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdlib/malloc.c:215
+215	/home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdlib/malloc.c: No such file or directory.
+Invalid cast.
+Detaching from program: /home/matthew/Documents/bristol_compsci_y2/concurrent_computing/TB2/Coursework/question/image.elf, Remote target
+Remote connection closed

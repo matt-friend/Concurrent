@@ -7,6 +7,20 @@
 
 #include "libc.h"
 
+uint32_t* sem_init(int i) {
+	uint32_t* r;
+
+	asm volatile ("mov r0, %2 \n"
+				  "svc %1    \n"
+				  "mov %0, r0 \n"
+				   : "=r" (r)
+				   : "I" (SYS_SEM_INIT), "r" (i)
+				   : "r0"
+				 );
+	
+	return r;
+}
+				   
 int  atoi( char* x        ) {
   char* p = x; bool s = false; int r = 0;
 

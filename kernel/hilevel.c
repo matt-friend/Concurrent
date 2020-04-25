@@ -6,6 +6,7 @@
  */
 
 #include "hilevel.h"
+#include <stdio.h>
 #include <stdlib.h>
 
 /* We assume there will be two user processes, stemming from execution of the 
@@ -22,6 +23,7 @@ pcb_t procTab[ MAX_PROCS ];
 pcb_t* executing = NULL;
 mlf_queues mlfq;
 int next_pid;
+bool available_stacks[MAX_PROCS];
 
 void dispatch( ctx_t* ctx, pcb_t* prev, pcb_t* next ) {
   mlfq.timeCount = 0;
@@ -135,7 +137,6 @@ void reQueue(pcb_t* pcb) {
 	else {
 		next_prty = pcb->prty;
 	}
-	dequeue(&mlfq.queues[prev_prty-1]);
 	enqueue(&mlfq.queues[next_prty-1], pcb);
 }
 
@@ -153,7 +154,8 @@ void multiLevelFeedbackSchedule(ctx_t* ctx){
 	if (prev == -1) {		
 		node* top = mlfqHighestNode(&mlfq);
 		dispatch(ctx, NULL, top->pcb);
-		top->pcb->status = STATUS_EXECUTING;
+		dequeue(&mlfq.queues[top->pcb->prty-1]);
+		executing->status = STATUS_EXECUTING;
 		return;
 	}
 	
@@ -168,8 +170,9 @@ void multiLevelFeedbackSchedule(ctx_t* ctx){
 	reQueue(&procTab[prev]);
 	node* newTop = mlfqHighestNode(&mlfq);
 	dispatch(ctx, &procTab[prev], newTop->pcb); 
+	dequeue(&mlfq.queues[newTop->pcb->prty-1]);
 	procTab[prev].status = STATUS_READY;
-	newTop->pcb->status = STATUS_EXECUTING;
+	executing->status = STATUS_EXECUTING;
 
 	return;
 }
@@ -193,16 +196,7 @@ void initMLFS(ctx_t* ctx) {
   mlfq.timeCount = 0;
 }
 
-extern void     main_P1();
-extern uint32_t tos_P1;
-extern void     main_P3(); 
-extern uint32_t tos_P3;
-extern void     main_P4(); 
-extern uint32_t tos_P4;
-extern void     main_P5(); 
-extern uint32_t tos_P5;
-extern void     main_console();
-extern uint32_t tos_console;
+extern void main_console();
 
 void hilevel_handler_rst( ctx_t* ctx              ) { 
     /* Configure interrupt handling mechanism
@@ -227,6 +221,7 @@ void hilevel_handler_rst( ctx_t* ctx              ) {
 
   for( int i = 0; i < MAX_PROCS; i++ ) {
     procTab[ i ].status = STATUS_INVALID;
+	available_stacks[i] = true;
   }
 
   /* Automatically execute the user programs P3 and P4 by setting the fields
@@ -242,11 +237,13 @@ void hilevel_handler_rst( ctx_t* ctx              ) {
   memset( &procTab[ 0 ], 0, sizeof( pcb_t ) ); // initialise 0-th PCB = console
   procTab[ 0 ].pid      = next_pid++;
   procTab[ 0 ].status   = STATUS_READY;
-  procTab[ 0 ].tos      = ( uint32_t )( &tos_console  );
+  procTab[ 0 ].tos      = ( uint32_t )( p_stack_space );
   procTab[ 0 ].prty     = 1;
   procTab[ 0 ].ctx.cpsr = 0x50;
   procTab[ 0 ].ctx.pc   = ( uint32_t )( &main_console );
   procTab[ 0 ].ctx.sp   = procTab[ 0 ].tos;
+
+  available_stacks[0] = false;
 
   initMLFS(ctx);
 
@@ -256,6 +253,16 @@ void hilevel_handler_rst( ctx_t* ctx              ) {
   multiLevelFeedbackSchedule(ctx);  
 
   return;
+}
+
+
+uint32_t getNextStack(){
+	for (int i = 0; i < MAX_PROCS; i++) {
+		if (available_stacks[i] == true) { 
+			available_stacks[i] = false;
+			return (uint32_t) p_stack_space - i*0x1000;
+		}
+	}
 }
 
 void hilevel_handler_svc( ctx_t* ctx, uint32_t id ) { 
@@ -304,52 +311,48 @@ void hilevel_handler_svc( ctx_t* ctx, uint32_t id ) {
 		  break;
 	  }
 
+	  // procTab[free_pcb] = *executing;
+	  memcpy( &procTab[free_pcb], executing, sizeof(pcb_t));
+
+  	  procTab[ free_pcb ].pid        = next_pid++;
+  	  procTab[ free_pcb ].status     = STATUS_READY;
+ 	  procTab[ free_pcb ].prty       = 1;
+	  procTab[ free_pcb ].ctx.gpr[0] = 0;
+
+	  enqueue(&mlfq.queues[procTab[free_pcb].prty-1],&procTab[free_pcb]);
+
 	  // if free PCB, copy existing value 
-	  ctx -> gpr[0] = 0;
-	  procTab[free_pcb] = *executing;
+	  ctx -> gpr[0] = procTab[free_pcb].pid;
+
+	  procTab[free_pcb].tos = getNextStack();
+
+	  int offset = executing->tos - ctx->sp;
+
+	  procTab[free_pcb].ctx.sp = procTab[free_pcb].tos - offset;
+	  memcpy((uint32_t*) procTab[free_pcb].ctx.sp, (uint32_t*) ctx->sp, offset);
+
 	  break;
 	}
 	
-	case 0x04 : { // 0x04 => exit(pid) 
+	case 0x04 : { // 0x04 => exit(success?) 
+	  for(int i = 0; i < MAX_PROCS; i++) {
+		if (procTab[i].pid == executing->pid) {
+	      memset( &procTab[i], 0, sizeof(pcb_t) ); // reset PCB
+          procTab[i].status = STATUS_INVALID;	// PCB available to be used		
+		}
+	  }
+	  executing = NULL;
+	  multiLevelFeedbackSchedule(ctx);
+	  break;
 	}
 
 	case 0x05 : { // 0x05 => exec(addr)
 	  
 	  // get address of process main function to execute
 	  uint32_t addr = (uint32_t)ctx->gpr[0];
-	  int pcb;
 
-	  for (int i = 0; i < MAX_PROCS; i++) { 
-		  // get procTab of executing program duplicate
-		  if (procTab[i].pid == executing->pid && executing != &procTab[i]) { 
-			  pcb = i;
-		  }
-	  }
-
-	  memset( &procTab[ pcb ], 0, sizeof( pcb_t ) ); // initialise PCB
-  	  procTab[ pcb ].pid      = next_pid++;
-  	  procTab[ pcb ].status   = STATUS_READY;
- 	  procTab[ pcb ].prty     = 1;
- 	  procTab[ pcb ].ctx.cpsr = 0x50;
-
-	  if (addr == (uint32_t)&main_P3) { 
-  	  	procTab[ pcb ].tos      = ( uint32_t )( &tos_P3  );
- 	  	procTab[ pcb ].ctx.pc   = ( uint32_t )( &main_P3 );
-	  }
-
-	  else if (addr == (uint32_t)&main_P4) { 
-  	  	procTab[ pcb ].tos      = ( uint32_t )( &tos_P4  );
- 	  	procTab[ pcb ].ctx.pc   = ( uint32_t )( &main_P4 );
-	  }
-
-	  else if (addr == (uint32_t)&main_P5) { 
-  	  	procTab[ pcb ].tos      = ( uint32_t )( &tos_P5  );
- 	  	procTab[ pcb ].ctx.pc   = ( uint32_t )( &main_P5 );
-	  }
-
-	  procTab[ pcb ].ctx.sp   = procTab[ pcb ].tos;
-
-	  enqueue(&mlfq.queues[procTab[pcb].prty-1],&procTab[pcb]);
+ 	  ctx->pc = addr;
+	  ctx->sp = executing->tos;
 
 	  break;
 	}
@@ -365,7 +368,7 @@ void hilevel_handler_svc( ctx_t* ctx, uint32_t id ) {
 		}
 	  }
 
-	  if (x == 0) { 
+	  if (x == 0 | x == 1) { 
 		// terminate process
 		for (int i = 0; i < MAX_PROCS; i++) { 
 		  if (procTab[i].pid == pid) {
@@ -381,14 +384,14 @@ void hilevel_handler_svc( ctx_t* ctx, uint32_t id ) {
 	}
 	
 	case 0x08 : { // sem_init( id )
-	  int* sem = malloc(sizeof(int));
+	  uint32_t* sem = malloc(sizeof(uint32_t));
 	  *sem = ctx->gpr[0];
-	  ctx->gpr[0] = *sem;
+	  ctx->gpr[0] = (uint32_t) sem;
 	  break;
 	}
 	
 	case 0x09 : { // sem_close ( *sem )
-	  free((int*)ctx->gpr[0]);	
+	  free((uint32_t*)ctx->gpr[0]);	
 	  break;
 	}
 
