@@ -30,7 +30,7 @@ SECTIONS {
   .       = . + 0x00001000;  
   tos_svc = .;
 
-  /* top of section for storing all tos pointers */
+  /* allocate space for all other program stacks */
   .       = . + 0x00001000*20;
   p_stack_space = .;
 

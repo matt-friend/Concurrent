@@ -196,6 +196,7 @@ void initMLFS(ctx_t* ctx) {
   mlfq.timeCount = 0;
 }
 
+extern uint32_t p_stack_space;
 extern void main_console();
 
 void hilevel_handler_rst( ctx_t* ctx              ) { 

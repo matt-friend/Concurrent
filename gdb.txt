@@ -590,3 +590,595 @@ Program received signal SIGINT, Interrupt.
 0x00000004 in ?? ()
 Detaching from program: /home/matthew/Documents/bristol_compsci_y2/concurrent_computing/TB2/Coursework/question/image.elf, Remote target
 Ending remote debugging.
+Breakpoint 1 at 0x70011744: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdlib/malloc.c, line 222.
+void free(void *);
+Breakpoint 2 at 0x70011730: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdlib/malloc.c, line 215.
+void *malloc(size_t);
+Breakpoint 3 at 0x70013dc4: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/reent/closer.c, line 49.
+int _close_r(struct _reent *, int);
+Breakpoint 4 at 0x700141c8: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/reent/lseekr.c, line 54.
+_off_t _lseek_r(struct _reent *, int, _off_t, 
+    int);
+Breakpoint 5 at 0x7001420c: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/reent/readr.c, line 54.
+_ssize_t _read_r(struct _reent *, int, 
+    void *, size_t);
+Breakpoint 6 at 0x700124e8: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/reent/sbrkr.c, line 53.
+void *_sbrk_r(struct _reent *, ptrdiff_t);
+Breakpoint 7 at 0x70013d80: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/reent/writer.c, line 54.
+_ssize_t _write_r(struct _reent *, int, 
+    const void *, size_t);
+Breakpoint 8 at 0x70013dfc: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdio/fclose.c, line 74.
+int _fclose_r(struct _reent *, FILE *);
+Breakpoint 9 at 0x70014148: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdio/fflush.c, line 224.
+int _fflush_r(struct _reent *, FILE *);
+Breakpoint 10 at 0x70013ef0: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdio/fclose.c, line 133.
+int fclose(FILE *);
+Breakpoint 11 at 0x70014198: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdio/fflush.c, line 260.
+int fflush(FILE *);
+Breakpoint 12 at 0x7001249c: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdlib/rand.c, line 84.
+int rand(void);
+Breakpoint 13 at 0x70012480: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdlib/rand.c, line 78.
+void srand(unsigned int);
+Breakpoint 14 at 0x70012380: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/string/memset.c, line 59.
+void *memset(void *, int, size_t);
+Breakpoint 15 at 0x70012800: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/string/strtok.c, line 100.
+char *strtok(char * restrict, 
+    const char * restrict);
+Breakpoint 16 at 0x700128d8: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/string/strtok_r.c, line 98.
+char *strtok_r(char * restrict, 
+    const char * restrict, char ** restrict);
+Breakpoint 17 at 0x70013288: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/errno/errno.c, line 13.
+int *__errno(void);
+Breakpoint 18 at 0x70013aa8: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/reent/reent.c, line 48.
+void _reclaim_reent(struct _reent *);
+Breakpoint 19 at 0x70012f5c: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/sys/arm/swi.h, line 78.
+void _exit(int);
+Breakpoint 20 at 0x70013a7c: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/reent/reent.c, line 36.
+void cleanup_glue(struct _reent *, 
+    struct _glue *);
+Breakpoint 21 at 0x70013f04: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdio/fflush.c, line 82.
+int __sflush_r(struct _reent *, FILE *);
+Breakpoint 22 at 0x70013574: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdio/findfp.c, line 311.
+void __fp_lock_all(void);
+Breakpoint 23 at 0x7001358c: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdio/findfp.c, line 317.
+void __fp_unlock_all(void);
+Breakpoint 24 at 0x70013404: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdio/findfp.c, line 101.
+struct _glue *__sfmoreglue(struct _reent *, 
+    int);
+Breakpoint 25 at 0x70013454: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdio/findfp.c, line 125.
+FILE *__sfp(struct _reent *);
+Breakpoint 26 at 0x700132ac: /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdio/findfp.c:__sinit. (2 locations)
+void __sinit(struct _reent *);
+Breakpoint 27 at 0x70013570: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdio/findfp.c, line 282.
+void __sinit_lock_release(void);
+Breakpoint 28 at 0x7001353c: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdio/findfp.c, line 194.
+void _cleanup(void);
+Breakpoint 29 at 0x700132a0: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdio/findfp.c, line 186.
+void _cleanup_r(struct _reent *);
+Breakpoint 30 at 0x70013298: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdio/findfp.c, line 304.
+static int __fp_unlock(FILE *);
+Breakpoint 31 at 0x70013980: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdio/fwalk.c, line 34.
+int _fwalk(struct _reent *, int (*)(FILE *));
+Breakpoint 32 at 0x700139f8: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdio/fwalk.c, line 61.
+int _fwalk_reent(struct _reent *, 
+    int (*)(struct _reent *, FILE *));
+Breakpoint 33 at 0x70013c50: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdio/stdio.c, line 135.
+int __sclose(struct _reent *, void *);
+Breakpoint 34 at 0x70013bc8: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdio/stdio.c, line 73.
+int __seofread(struct _reent *, void *, 
+    char *, int);
+Breakpoint 35 at 0x70013b98: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdio/stdio.c, line 38.
+int __sread(struct _reent *, void *, char *, 
+    int);
+Breakpoint 36 at 0x70013c24: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdio/stdio.c, line 113.
+_fpos_t __sseek(struct _reent *, void *, 
+    _fpos_t, int);
+Breakpoint 37 at 0x70013bd0: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdio/stdio.c, line 81.
+int __swrite(struct _reent *, void *, 
+    const char *, int);
+Breakpoint 38 at 0x700136a0: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdlib/mallocr.c, line 2644.
+void _free_r(struct _reent *, void *);
+Breakpoint 39 at 0x70011758: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdlib/mallocr.c, line 2328.
+void *_malloc_r(struct _reent *, size_t);
+Breakpoint 40 at 0x700135a4: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdlib/mallocr.c, line 3309.
+int _malloc_trim_r(struct _reent *, size_t);
+Breakpoint 41 at 0x7001247c: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdlib/mlock.c, line 58.
+void __malloc_unlock(struct _reent *);
+Breakpoint 42 at 0x70012818: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/string/strtok_r.c, line 38.
+char *__strtok_r(char *, const char *, 
+    char **, int);
+Breakpoint 43 at 0x70012f14: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/sys/arm/syscalls.c, line 413.
+int _close(int);
+Breakpoint 44 at 0x70012fe0: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/sys/arm/syscalls.c, line 491.
+int _fstat(int, struct stat *);
+Breakpoint 45 at 0x70012f80: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/sys/arm/syscalls.c, line 452.
+int _getpid(int);
+Breakpoint 46 at 0x700130d8: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/sys/arm/syscalls.c, line 542.
+int _gettimeofday(struct timeval *, void *);
+Breakpoint 47 at 0x70013154: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/sys/arm/syscalls.c, line 595.
+int _isatty(int);
+Breakpoint 48 at 0x70012f2c: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/sys/arm/syscalls.c, line 423.
+int _kill(int, int);
+Breakpoint 49 at 0x70013078: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/sys/arm/syscalls.c, line 519.
+int _link(void);
+Breakpoint 50 at 0x70012c5c: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/sys/arm/syscalls.c, line 282.
+int _lseek(int, int, int);
+Breakpoint 51 at 0x70012e6c: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/sys/arm/syscalls.c, line 391.
+int _open(const char *, int, ...);
+Breakpoint 52 at 0x700130d4: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/sys/arm/syscalls.c, line 536.
+void _raise(void);
+Breakpoint 53 at 0x70012a80: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/sys/arm/syscalls.c, line 209.
+int _read(int, char *, int);
+Breakpoint 54 at 0x70013220: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/sys/arm/syscalls.c, line 640.
+int _rename(const char *, const char *);
+Breakpoint 55 at 0x70012f88: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/sys/arm/syscalls.c, line 461.
+caddr_t _sbrk(int);
+Breakpoint 56 at 0x70013010: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/sys/arm/syscalls.c, line 500.
+int _stat(const char *, struct stat *);
+Breakpoint 57 at 0x70012ea0: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/sys/arm/syscalls.c, line 397.
+int _swiclose(int);
+Breakpoint 58 at 0x70012b48: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/sys/arm/syscalls.c, line 227.
+int _swilseek(int, int, int);
+Breakpoint 59 at 0x70012d84: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/sys/arm/syscalls.c, line 332.
+int _swiopen(const char *, int);
+Breakpoint 60 at 0x70012a3c: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/sys/arm/syscalls.c, line 187.
+int _swiread(int, char *, int);
+Breakpoint 61 at 0x70012c74: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/sys/arm/syscalls.c, line 292.
+int _swiwrite(int, char *, int);
+Breakpoint 62 at 0x7001319c: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/sys/arm/syscalls.c, line 614.
+int _system(const char *);
+Breakpoint 63 at 0x7001311c: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/sys/arm/syscalls.c, line 572.
+clock_t _times(struct tms *);
+Breakpoint 64 at 0x70013080: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/sys/arm/syscalls.c, line 523.
+int _unlink(const char *);
+Breakpoint 65 at 0x70012cb8: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/sys/arm/syscalls.c, line 314.
+int _write(int, char *, int);
+Breakpoint 66 at 0x70012988: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/sys/arm/syscalls.c, line 114.
+void initialise_monitor_handles(void);
+Breakpoint 67 at 0x700128e0: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/sys/arm/syscalls.c, line 100.
+static int remap_handle(int);
+Breakpoint 68 at 0x70012958: file /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/sys/arm/syscalls.c, line 175.
+static int wrap(int);
+Breakpoint 69 at 0x700105a4: file device/PL011.c, line 47.
+_Bool PL011_can_getc(PL011_t *);
+Breakpoint 70 at 0x70010594: file device/PL011.c, line 42.
+_Bool PL011_can_putc(PL011_t *);
+Breakpoint 71 at 0x700105dc: file device/PL011.c, line 59.
+uint8_t PL011_getc(PL011_t *, _Bool);
+Breakpoint 72 at 0x7001064c: file device/PL011.c, line 69.
+uint8_t PL011_geth(PL011_t *, _Bool);
+Breakpoint 73 at 0x700105b4: file device/PL011.c, line 52.
+void PL011_putc(PL011_t *, uint8_t, _Bool);
+Breakpoint 74 at 0x70010608: file device/PL011.c, line 64.
+void PL011_puth(PL011_t *, uint8_t, _Bool);
+Breakpoint 75 at 0x70010568: file device/PL011.c, line 30.
+char itox(int);
+Breakpoint 76 at 0x70010520: file device/PL011.c, line 16.
+int xtoi(char);
+Breakpoint 77 at 0x70010508: file device/PL050.c, line 22.
+uint8_t PL050_getc(PL050_t *);
+Breakpoint 78 at 0x700104f4: file device/PL050.c, line 15.
+void PL050_putc(PL050_t *, uint8_t);
+Breakpoint 79 at 0x700100a4: file device/disk.c, line 10.
+void addr_puth(PL011_t *, uint32_t, _Bool);
+Breakpoint 80 at 0x70010128: file device/disk.c, line 24.
+void data_geth(PL011_t *, uint8_t *, int, 
+    _Bool);
+Breakpoint 81 at 0x700100f0: file device/disk.c, line 18.
+void data_puth(PL011_t *, const uint8_t *, 
+    int, _Bool);
+Breakpoint 82 at 0x70010228: file device/disk.c, line 54.
+int disk_get_block_len();
+Breakpoint 83 at 0x70010160: file device/disk.c, line 29.
+int disk_get_block_num();
+Breakpoint 84 at 0x700103c4: file device/disk.c, line 101.
+int disk_rd(uint32_t, uint8_t *, int);
+Breakpoint 85 at 0x700102f0: file device/disk.c, line 79.
+int disk_wr(uint32_t, const uint8_t *, int);
+Breakpoint 86 at 0x70010898: file kernel/hilevel.c, line 94.
+void delPCBNode(queue *, pcb_t *);
+Breakpoint 87 at 0x70010868: file kernel/hilevel.c, line 80.
+void dequeue(queue *);
+Breakpoint 88 at 0x70010714: file kernel/hilevel.c, line 29.
+void dispatch(ctx_t *, pcb_t *, pcb_t *);
+Breakpoint 89 at 0x7001083c: file kernel/hilevel.c, line 67.
+void enqueue(queue *, pcb_t *);
+Breakpoint 90 at 0x70010c70: file kernel/hilevel.c, line 262.
+uint32_t getNextStack();
+Breakpoint 91 at 0x70010f94: file kernel/hilevel.c, line 407.
+void hilevel_handler_irq(ctx_t *);
+Breakpoint 92 at 0x70010b24: file kernel/hilevel.c, line 202.
+void hilevel_handler_rst(ctx_t *);
+Breakpoint 93 at 0x70010cd8: file kernel/hilevel.c, line 269.
+void hilevel_handler_svc(ctx_t *, uint32_t);
+Breakpoint 94 at 0x70010a98: file kernel/hilevel.c, line 180.
+void initMLFS(ctx_t *);
+Breakpoint 95 at 0x7001082c: file kernel/hilevel.c, line 64.
+_Bool isEmpty(queue *);
+Breakpoint 96 at 0x700108e4: file kernel/hilevel.c, line 119.
+node *mlfqHighestNode(mlf_queues *);
+Breakpoint 97 at 0x70010958: file kernel/hilevel.c, line 143.
+void multiLevelFeedbackSchedule(ctx_t *);
+Breakpoint 98 at 0x7001080c: file kernel/hilevel.c, line 56.
+node *newNode(pcb_t *);
+Breakpoint 99 at 0x70010928: file kernel/hilevel.c, line 129.
+void reQueue(pcb_t *);
+Breakpoint 100 at 0x70011090: file user/P3.c, line 20.
+void main_P3();
+Breakpoint 101 at 0x7001101c: file user/P3.c, line 11.
+uint32_t weight(uint32_t);
+Breakpoint 102 at 0x700110c8: file user/P4.c, line 10.
+uint32_t gcd(uint32_t, uint32_t);
+Breakpoint 103 at 0x70011104: file user/P4.c, line 22.
+void main_P4();
+Breakpoint 104 at 0x70011454: file user/P5.c, line 11.
+int is_prime(uint32_t);
+Breakpoint 105 at 0x700114f0: file user/P5.c, line 24.
+void main_P5();
+Breakpoint 106 at 0x70011280: file user/console.c, line 22.
+void gets(char *, int);
+Breakpoint 107 at 0x700112d4: file user/console.c, line 41.
+void *load(char *);
+Breakpoint 108 at 0x70011348: file user/console.c, line 87.
+void main_console();
+Breakpoint 109 at 0x70011244: file user/console.c, line 16.
+void puts(char *, int);
+Breakpoint 110 at 0x700111f4: file user/dining_philosophers.c, line 31.
+void main_philosopher();
+Breakpoint 111 at 0x7001115c: file user/dining_philosophers.c, line 6.
+void philosopher(int);
+Breakpoint 112 at 0x70011570: file user/libc.c, line 24.
+int atoi(char *);
+Breakpoint 113 at 0x700116e8: file user/libc.c, line 130.
+void exec(const void *);
+Breakpoint 114 at 0x700116d8: file user/libc.c, line 120.
+void exit(int);
+Breakpoint 115 at 0x700116c8: file user/libc.c, line 111.
+int fork();
+Breakpoint 116 at 0x700115d4: file user/libc.c, line 42.
+void itoa(char *, int);
+Breakpoint 117 at 0x700116f8: file user/libc.c, line 140.
+int kill(int, int);
+Breakpoint 118 at 0x70011718: file user/libc.c, line 154.
+void nice(int, int);
+Breakpoint 119 at 0x7001169c: file user/libc.c, line 93.
+int read(int, void *, size_t);
+Breakpoint 120 at 0x70011558: file user/libc.c, line 10.
+uint32_t *sem_init(int);
+Breakpoint 121 at 0x70011670: file user/libc.c, line 78.
+int write(int, const void *, size_t);
+Breakpoint 122 at 0x70011668: file user/libc.c, line 70.
+void yield();
+Continuing.
+
+Breakpoint 92, hilevel_handler_rst (
+    ctx=0x70018584) at kernel/hilevel.c:202
+202	void hilevel_handler_rst( ctx_t* ctx              ) { 
+Continuing.
+
+Breakpoint 14, memset (
+    m=0x70014ef0 <procTab>, c=0, n=84)
+    at /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/string/memset.c:59
+59	/home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/string/memset.c: No such file or directory.
+Continuing.
+
+Breakpoint 94, initMLFS (
+    ctx=ctx@entry=0x70018584)
+    at kernel/hilevel.c:180
+180	void initMLFS(ctx_t* ctx) {
+Continuing.
+
+Breakpoint 89, enqueue (
+    q=q@entry=0x70014eb0 <mlfq>, 
+    pcb=pcb@entry=0x70014ef0 <procTab>)
+    at kernel/hilevel.c:67
+67	void enqueue(queue* q, pcb_t* pcb) {
+Continuing.
+
+Breakpoint 98, newNode (
+    pcb=pcb@entry=0x70014ef0 <procTab>)
+    at kernel/hilevel.c:56
+56	node* newNode(pcb_t* pcb) { 
+Continuing.
+
+Breakpoint 2, malloc (nbytes=8)
+    at /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdlib/malloc.c:215
+215	/home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdlib/malloc.c: No such file or directory.
+Continuing.
+
+Breakpoint 39, _malloc_r (
+    reent_ptr=0x700149a0 <impure_data>, 
+    bytes=8)
+    at /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdlib/mallocr.c:2328
+2328	/home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdlib/mallocr.c: No such file or directory.
+Continuing.
+
+Breakpoint 6, _sbrk_r (
+    ptr=0x700149a0 <impure_data>, incr=32)
+    at /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/reent/sbrkr.c:53
+53	/home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/reent/sbrkr.c: No such file or directory.
+Continuing.
+
+Breakpoint 55, _sbrk (incr=32)
+    at /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/sys/arm/syscalls.c:461
+461	/home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/sys/arm/syscalls.c: No such file or directory.
+Continuing.
+
+Breakpoint 6, _sbrk_r (
+    ptr=0x700149a0 <impure_data>, incr=2588)
+    at /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/reent/sbrkr.c:53
+53	/home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/reent/sbrkr.c: No such file or directory.
+Continuing.
+
+Breakpoint 55, _sbrk (incr=2588)
+    at /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/sys/arm/syscalls.c:461
+461	/home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/sys/arm/syscalls.c: No such file or directory.
+Continuing.
+
+Breakpoint 41, __malloc_unlock (
+    ptr=0x700149a0 <impure_data>)
+    at /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdlib/mlock.c:58
+58	/home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdlib/mlock.c: No such file or directory.
+Continuing.
+
+Breakpoint 97, multiLevelFeedbackSchedule (
+    ctx=ctx@entry=0x70018584)
+    at kernel/hilevel.c:143
+143	void multiLevelFeedbackSchedule(ctx_t* ctx){
+Continuing.
+
+Breakpoint 96, mlfqHighestNode (
+    mlfq=mlfq@entry=0x70014eb0 <mlfq>)
+    at kernel/hilevel.c:119
+119	node* mlfqHighestNode(mlf_queues* mlfq) {
+Continuing.
+
+Breakpoint 88, dispatch (
+    ctx=ctx@entry=0x70018584, 
+    prev=prev@entry=0x0, 
+    next=0x70014ef0 <procTab>)
+    at kernel/hilevel.c:29
+29	  mlfq.timeCount = 0;
+Continuing.
+
+Breakpoint 73, PL011_putc (d=0x10009000, 
+    x=91 '[', f=true) at device/PL011.c:52
+52	  while( f && ( d->FR & 0x20 ) );
+Continuing.
+
+Breakpoint 73, PL011_putc (d=0x10009000, 
+    x=63 '?', f=true) at device/PL011.c:52
+52	  while( f && ( d->FR & 0x20 ) );
+Continuing.
+
+Breakpoint 73, PL011_putc (d=0x10009000, 
+    x=45 '-', f=true) at device/PL011.c:52
+52	  while( f && ( d->FR & 0x20 ) );
+Continuing.
+
+Breakpoint 73, PL011_putc (d=0x10009000, 
+    x=62 '>', f=true) at device/PL011.c:52
+52	  while( f && ( d->FR & 0x20 ) );
+Continuing.
+
+Breakpoint 73, PL011_putc (d=0x10009000, 
+    x=49 '1', f=true) at device/PL011.c:52
+52	  while( f && ( d->FR & 0x20 ) );
+Continuing.
+
+Breakpoint 73, PL011_putc (d=0x10009000, 
+    x=93 ']', f=true) at device/PL011.c:52
+52	  while( f && ( d->FR & 0x20 ) );
+Continuing.
+
+Breakpoint 87, dequeue (q=0x70014eb0 <mlfq>)
+    at kernel/hilevel.c:80
+80		if (isEmpty(q)) {
+Continuing.
+
+Breakpoint 1, free (aptr=0x700155d0)
+    at /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdlib/malloc.c:222
+222	/home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdlib/malloc.c: No such file or directory.
+Continuing.
+
+Breakpoint 38, _free_r (
+    reent_ptr=0x700149a0 <impure_data>, 
+    mem=0x700155d0)
+    at /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdlib/mallocr.c:2644
+2644	/home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdlib/mallocr.c: No such file or directory.
+Continuing.
+
+Breakpoint 41, __malloc_unlock (
+    ptr=0x700149a0 <impure_data>)
+    at /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdlib/mlock.c:58
+58	/home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdlib/mlock.c: No such file or directory.
+Continuing.
+
+Breakpoint 108, main_console ()
+    at user/console.c:87
+87	void main_console() {
+Continuing.
+
+Breakpoint 109, puts (
+    x=x@entry=0x7001446c "console$ ", 
+    n=n@entry=9) at user/console.c:16
+16	  for( int i = 0; i < n; i++ ) {
+Continuing.
+
+Breakpoint 73, PL011_putc (d=0x1000a000, 
+    x=99 'c', f=true) at device/PL011.c:52
+52	  while( f && ( d->FR & 0x20 ) );
+Continuing.
+
+Breakpoint 73, PL011_putc (d=0x1000a000, 
+    x=111 'o', f=true) at device/PL011.c:52
+52	  while( f && ( d->FR & 0x20 ) );
+Continuing.
+
+Breakpoint 73, PL011_putc (d=0x1000a000, 
+    x=110 'n', f=true) at device/PL011.c:52
+52	  while( f && ( d->FR & 0x20 ) );
+Continuing.
+
+Breakpoint 73, PL011_putc (d=0x1000a000, 
+    x=115 's', f=true) at device/PL011.c:52
+52	  while( f && ( d->FR & 0x20 ) );
+Continuing.
+
+Breakpoint 73, PL011_putc (d=0x1000a000, 
+    x=111 'o', f=true) at device/PL011.c:52
+52	  while( f && ( d->FR & 0x20 ) );
+Continuing.
+
+Breakpoint 73, PL011_putc (d=0x1000a000, 
+    x=108 'l', f=true) at device/PL011.c:52
+52	  while( f && ( d->FR & 0x20 ) );
+Continuing.
+
+Breakpoint 73, PL011_putc (d=0x1000a000, 
+    x=101 'e', f=true) at device/PL011.c:52
+52	  while( f && ( d->FR & 0x20 ) );
+Continuing.
+
+Breakpoint 73, PL011_putc (d=0x1000a000, 
+    x=36 '$', f=true) at device/PL011.c:52
+52	  while( f && ( d->FR & 0x20 ) );
+Continuing.
+
+Breakpoint 73, PL011_putc (d=0x1000a000, 
+    x=32 ' ', f=true) at device/PL011.c:52
+52	  while( f && ( d->FR & 0x20 ) );
+Continuing.
+
+Breakpoint 92, hilevel_handler_rst (
+    ctx=0x70018584) at kernel/hilevel.c:202
+202	void hilevel_handler_rst( ctx_t* ctx              ) { 
+Continuing.
+
+Breakpoint 14, memset (
+    m=0x70014ef0 <procTab>, c=0, n=84)
+    at /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/string/memset.c:59
+59	/home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/string/memset.c: No such file or directory.
+Continuing.
+
+Breakpoint 94, initMLFS (
+    ctx=ctx@entry=0x70018584)
+    at kernel/hilevel.c:180
+180	void initMLFS(ctx_t* ctx) {
+Continuing.
+
+Breakpoint 89, enqueue (
+    q=q@entry=0x70014eb0 <mlfq>, 
+    pcb=pcb@entry=0x70014ef0 <procTab>)
+    at kernel/hilevel.c:67
+67	void enqueue(queue* q, pcb_t* pcb) {
+Continuing.
+
+Breakpoint 98, newNode (
+    pcb=pcb@entry=0x70014ef0 <procTab>)
+    at kernel/hilevel.c:56
+56	node* newNode(pcb_t* pcb) { 
+Continuing.
+
+Breakpoint 2, malloc (nbytes=8)
+    at /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdlib/malloc.c:215
+215	/home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdlib/malloc.c: No such file or directory.
+Continuing.
+
+Breakpoint 39, _malloc_r (
+    reent_ptr=0x700149a0 <impure_data>, 
+    bytes=8)
+    at /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdlib/mallocr.c:2328
+2328	/home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdlib/mallocr.c: No such file or directory.
+Continuing.
+
+Breakpoint 41, __malloc_unlock (
+    ptr=0x700149a0 <impure_data>)
+    at /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdlib/mlock.c:58
+58	/home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdlib/mlock.c: No such file or directory.
+Continuing.
+
+Breakpoint 97, multiLevelFeedbackSchedule (
+    ctx=ctx@entry=0x70018584)
+    at kernel/hilevel.c:143
+143	void multiLevelFeedbackSchedule(ctx_t* ctx){
+Continuing.
+
+Breakpoint 99, reQueue (
+    pcb=pcb@entry=0x70014ef0 <procTab>)
+    at kernel/hilevel.c:129
+129	void reQueue(pcb_t* pcb) {
+Continuing.
+
+Breakpoint 89, enqueue (
+    q=0x70014eb8 <mlfq+8>, 
+    pcb=pcb@entry=0x70014ef0 <procTab>)
+    at kernel/hilevel.c:67
+67	void enqueue(queue* q, pcb_t* pcb) {
+Continuing.
+
+Breakpoint 98, newNode (
+    pcb=pcb@entry=0x70014ef0 <procTab>)
+    at kernel/hilevel.c:56
+56	node* newNode(pcb_t* pcb) { 
+Continuing.
+
+Breakpoint 2, malloc (nbytes=8)
+    at /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdlib/malloc.c:215
+215	/home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdlib/malloc.c: No such file or directory.
+Continuing.
+
+Breakpoint 39, _malloc_r (
+    reent_ptr=0x700149a0 <impure_data>, 
+    bytes=8)
+    at /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdlib/mallocr.c:2328
+2328	/home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdlib/mallocr.c: No such file or directory.
+Continuing.
+
+Breakpoint 41, __malloc_unlock (
+    ptr=0x700149a0 <impure_data>)
+    at /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdlib/mlock.c:58
+58	/home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdlib/mlock.c: No such file or directory.
+Continuing.
+
+Breakpoint 96, mlfqHighestNode (
+    mlfq=mlfq@entry=0x70014eb0 <mlfq>)
+    at kernel/hilevel.c:119
+119	node* mlfqHighestNode(mlf_queues* mlfq) {
+Continuing.
+
+Breakpoint 88, dispatch (
+    ctx=ctx@entry=0x70018584, 
+    prev=prev@entry=0x70014ef0 <procTab>, 
+    next=0x70014ef0 <procTab>)
+    at kernel/hilevel.c:29
+29	  mlfq.timeCount = 0;
+Continuing.
+
+Breakpoint 87, dequeue (q=0x70014eb8 <mlfq+8>)
+    at kernel/hilevel.c:80
+80		if (isEmpty(q)) {
+Continuing.
+
+Breakpoint 1, free (aptr=0x700155e0)
+    at /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdlib/malloc.c:222
+222	/home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdlib/malloc.c: No such file or directory.
+Continuing.
+
+Breakpoint 38, _free_r (
+    reent_ptr=0x700149a0 <impure_data>, 
+    mem=0x700155e0)
+    at /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdlib/mallocr.c:2644
+2644	/home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdlib/mallocr.c: No such file or directory.
+Continuing.
+
+Breakpoint 41, __malloc_unlock (
+    ptr=0x700149a0 <impure_data>)
+    at /home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdlib/mlock.c:58
+58	/home/tcwg-buildslave/workspace/tcwg-make-release/label/tcwg-x86_64-ex40/target/arm-eabi/snapshots/newlib.git~linaro_newlib-branch/newlib/libc/stdlib/mlock.c: No such file or directory.
+Continuing.
+
+Program received signal SIGINT, Interrupt.
+0x00000004 in ?? ()
+Detaching from program: /home/matthew/Documents/bristol_compsci_y2/concurrent_computing/TB2/Coursework/question/image.elf, Remote target
+Ending remote debugging.
