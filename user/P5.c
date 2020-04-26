@@ -33,6 +33,5 @@ void main_P5() {
     }
   }
 
-  write( STDOUT_FILENO, "F", 1 );
   exit( EXIT_SUCCESS );
 }

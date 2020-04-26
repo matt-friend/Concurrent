@@ -3,4 +3,6 @@
 
 #define PHILOSOPHERS 16
 
+#include "lolevel_sem.h"
+
 #endif

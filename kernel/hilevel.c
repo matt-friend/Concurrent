@@ -41,12 +41,13 @@ void dispatch( ctx_t* ctx, pcb_t* prev, pcb_t* next ) {
     next_pid = '0' + next->pid;
   }
 
-    PL011_putc( UART0, '[',      true );
+   /* PL011_putc( UART0, '[',      true );
     PL011_putc( UART0, prev_pid, true );
     PL011_putc( UART0, '-',      true );
     PL011_putc( UART0, '>',      true );
     PL011_putc( UART0, next_pid, true );
     PL011_putc( UART0, ']',      true );
+	*/
 
     executing = next;                           // update   executing process to P_{next}
 
@@ -203,7 +204,7 @@ void hilevel_handler_rst( ctx_t* ctx              ) {
     /* Configure interrupt handling mechanism
     */
 
-    TIMER0->Timer1Load  = 0x00100000; // select period = 2^20 ticks ~= 1 sec
+    TIMER0->Timer1Load  = 0x00001000; // select period
 	TIMER0->Timer1Ctrl  = 0x00000002; // select 32-bit   timer
     TIMER0->Timer1Ctrl |= 0x00000040; // select periodic timer
 	TIMER0->Timer1Ctrl |= 0x00000020; // enable          timer interrupt
@@ -238,7 +239,7 @@ void hilevel_handler_rst( ctx_t* ctx              ) {
   memset( &procTab[ 0 ], 0, sizeof( pcb_t ) ); // initialise 0-th PCB = console
   procTab[ 0 ].pid      = next_pid++;
   procTab[ 0 ].status   = STATUS_READY;
-  procTab[ 0 ].tos      = ( uint32_t )( p_stack_space );
+  procTab[ 0 ].tos      = ( uint32_t )( &p_stack_space );
   procTab[ 0 ].prty     = 1;
   procTab[ 0 ].ctx.cpsr = 0x50;
   procTab[ 0 ].ctx.pc   = ( uint32_t )( &main_console );
@@ -261,7 +262,7 @@ uint32_t getNextStack(){
 	for (int i = 0; i < MAX_PROCS; i++) {
 		if (available_stacks[i] == true) { 
 			available_stacks[i] = false;
-			return (uint32_t) p_stack_space - i*0x1000;
+			return ((uint32_t) &p_stack_space - i*0x1000);
 		}
 	}
 }
@@ -313,7 +314,7 @@ void hilevel_handler_svc( ctx_t* ctx, uint32_t id ) {
 	  }
 
 	  // procTab[free_pcb] = *executing;
-	  memcpy( &procTab[free_pcb], executing, sizeof(pcb_t));
+	  memcpy( &procTab[free_pcb].ctx, ctx, sizeof(ctx_t));
 
   	  procTab[ free_pcb ].pid        = next_pid++;
   	  procTab[ free_pcb ].status     = STATUS_READY;
