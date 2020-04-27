@@ -6,7 +6,7 @@ bool phils[PHILOSOPHERS];
 
 void philosopher(int p) {
 	while(true) {
-		for (volatile int i = 0; i < ((rand() % 100000)*1000); i++) { }
+		for (volatile int i = 0; i < (rand() % 100000); i++) {}
 
 		int left = (p-1)%PHILOSOPHERS;
 		int right = p;
@@ -25,7 +25,7 @@ void philosopher(int p) {
         write(0,x,2);
 		phils[p] = true;
 
-		for (volatile int i = 0; i < ((rand() % 100000)*1000); i++) { }
+		for (volatile int i = 0; i < (rand() % 100000); i++) {}
 
 		sem_post(forks[left]);
 		sem_post(forks[right]);
