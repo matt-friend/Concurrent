@@ -42,6 +42,7 @@
 
 #define MAX_PROCS 20 
 #define PRIORITY_LEVELS 3
+#define STACK_SIZE 0x1000
 
 typedef int pid_t;
 typedef int prty_t;

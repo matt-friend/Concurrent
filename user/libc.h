@@ -51,6 +51,16 @@ typedef int pid_t;
 #define STDOUT_FILENO ( 1 )
 #define STDERR_FILENO ( 2 )
 
+// create a semaphore of value i
+extern uint32_t* sem_init(int i);
+// close a semaphore
+extern void sem_close(uint32_t* s);
+
+// decrement semaphore
+extern void sem_wait(uint32_t* x);
+// increment semaphore
+extern void sem_post(uint32_t* x);
+
 // convert ASCII string x into integer r
 extern int  atoi( char* x        );
 // convert integer x into ASCII string r

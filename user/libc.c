@@ -20,6 +20,15 @@ uint32_t* sem_init(int i) {
 	
 	return r;
 }
+
+void sem_close(uint32_t* s) {
+	asm volatile ("mov r0, %1 \n"
+			      "svc %0     \n"
+				  :
+				  : "I" (SYS_SEM_CLOSE), "r"(s) 
+				  :
+			);
+}
 				   
 int  atoi( char* x        ) {
   char* p = x; bool s = false; int r = 0;

@@ -19,25 +19,26 @@
  *   to execute.
  */
 
-pcb_t procTab[ MAX_PROCS ];
-pcb_t* executing = NULL;
-mlf_queues mlfq;
-int next_pid;
-bool available_stacks[MAX_PROCS];
+pcb_t procTab[ MAX_PROCS ];        // PCB table
+pcb_t* executing = NULL;           // Pointer to currently executing PCB
+mlf_queues mlfq;                   // Multi-level feedback queue structure
+int next_pid;                      // PID counter to ensure unique PIDs
+bool available_stacks[MAX_PROCS];  // Free stack space table
 
+// Resume/ begin execution of a process by the processor
 void dispatch( ctx_t* ctx, pcb_t* prev, pcb_t* next ) {
-  mlfq.timeCount = 0;
+  mlfq.timeCount = 0; // reset process execution timer
 
   char prev_pid = '?', next_pid = '?';
 
   if (prev == next) { return; }
 
   if( NULL != prev ) {
-    memcpy( &prev->ctx, ctx, sizeof( ctx_t ) ); // preserve execution context of P_{prev}
+    memcpy( &prev->ctx, ctx, sizeof( ctx_t ) ); // preserve execution context of process
     prev_pid = '0' + prev->pid;
   }
   if( NULL != next ) {
-    memcpy( ctx, &next->ctx, sizeof( ctx_t ) ); // restore  execution context of P_{next}
+    memcpy( ctx, &next->ctx, sizeof( ctx_t ) ); // restore execution context of process
     next_pid = '0' + next->pid;
   }
 
@@ -49,11 +50,12 @@ void dispatch( ctx_t* ctx, pcb_t* prev, pcb_t* next ) {
     PL011_putc( UART0, ']',      true );
 	*/
 
-    executing = next;                           // update   executing process to P_{next}
+    executing = next;                           // update executing process
 
   return;
 }
 
+// create queue node for given PCB
 node* newNode(pcb_t* pcb) { 
     node* temp = (node*)malloc(sizeof(node)); 
     temp->pcb = pcb; 
@@ -65,6 +67,7 @@ bool isEmpty(queue* q) {
 	return q->tail == NULL;
 }
 
+// place PCB node onto end of given queue
 void enqueue(queue* q, pcb_t* pcb) {
     node* temp = newNode(pcb);
 
@@ -77,6 +80,7 @@ void enqueue(queue* q, pcb_t* pcb) {
     q->tail = temp;
 }
 
+// remove head node from given queue
 void dequeue(queue* q) {
 	if (isEmpty(q)) {
 		return;
@@ -92,7 +96,10 @@ void dequeue(queue* q) {
 	free(temp);
 }
 
+// delete PCB node from any point in a queue
 void delPCBNode(queue* q, pcb_t* pcb) {
+
+	if (pcb->status != STATUS_READY) {return;} // only PCBs with ready status are in a queue
 
 	if (q->head->pcb == pcb) {
 		dequeue(q);
@@ -116,7 +123,7 @@ void delPCBNode(queue* q, pcb_t* pcb) {
 	free(temp2);
 }
 
-
+// retrieve highest priority PCB node from within the multi-level queue structure
 node* mlfqHighestNode(mlf_queues* mlfq) {
 	for (int i = 0; i < PRIORITY_LEVELS; i++) {
 		if (!isEmpty(&mlfq->queues[i])) {
@@ -126,7 +133,7 @@ node* mlfqHighestNode(mlf_queues* mlfq) {
 	return NULL;
 }
 
-
+// Place given PCB node (that has just finished being executed) into a queue 
 void reQueue(pcb_t* pcb) {
 
 	prty_t prev_prty = pcb->prty;
@@ -141,6 +148,7 @@ void reQueue(pcb_t* pcb) {
 	enqueue(&mlfq.queues[next_prty-1], pcb);
 }
 
+// Scheduler
 void multiLevelFeedbackSchedule(ctx_t* ctx){
 	int prev = -1;	
 
@@ -179,7 +187,7 @@ void multiLevelFeedbackSchedule(ctx_t* ctx){
 }
 
 void initMLFS(ctx_t* ctx) {
-  /* place all initialised processes into correct priority queue */
+  // place all initialised processes into correct priority queue
 
   for (int i = 0; i < MAX_PROCS; i++) {
     if (procTab[i].status != STATUS_INVALID) {
@@ -189,6 +197,7 @@ void initMLFS(ctx_t* ctx) {
 	}
   }
 
+  // Each priority queue is assigned double the time slot for processes than the queue above
   mlfq.queueTime[0] = 1;
   for (int i = 1; i < PRIORITY_LEVELS; i++) {
 	  mlfq.queueTime[i] = mlfq.queueTime[i-1]*2;
@@ -201,8 +210,7 @@ extern uint32_t p_stack_space;
 extern void main_console();
 
 void hilevel_handler_rst( ctx_t* ctx              ) { 
-    /* Configure interrupt handling mechanism
-    */
+    // Configure interrupt handling mechanism
 
     TIMER0->Timer1Load  = 0x00001000; // select period
 	TIMER0->Timer1Ctrl  = 0x00000002; // select 32-bit   timer
@@ -226,12 +234,10 @@ void hilevel_handler_rst( ctx_t* ctx              ) {
 	available_stacks[i] = true;
   }
 
-  /* Automatically execute the user programs P3 and P4 by setting the fields
-   * in two associated PCBs.  Note in each case that
-   *    
+  /* Automatically execute the console:
    * - the CPSR value of 0x50 means the processor is switched into USR mode, 
-   *   with IRQ interrupts enabled, and
-   * - the PC and SP values match the entry point and top of stack. 
+   *   with IRQ interrupts enabled
+   * - the PC and SP values match the entry point and top of the stack space. 
    */
 
   next_pid = 1;
@@ -245,24 +251,21 @@ void hilevel_handler_rst( ctx_t* ctx              ) {
   procTab[ 0 ].ctx.pc   = ( uint32_t )( &main_console );
   procTab[ 0 ].ctx.sp   = procTab[ 0 ].tos;
 
-  available_stacks[0] = false;
+  available_stacks[0] = false; // the top stack area in the stack space is now being used
 
+  // Initialise the feedback queue and start scheduling
   initMLFS(ctx);
-
-  /* Once the PCBs are initialised, start scheduling
-   */
-
   multiLevelFeedbackSchedule(ctx);  
 
   return;
 }
 
-
+// Find an empty stack area in the program stack space
 uint32_t getNextStack(){
 	for (int i = 0; i < MAX_PROCS; i++) {
 		if (available_stacks[i] == true) { 
 			available_stacks[i] = false;
-			return ((uint32_t) &p_stack_space - i*0x1000);
+			return ((uint32_t) &p_stack_space - i*STACK_SIZE);
 		}
 	}
 }
@@ -279,7 +282,6 @@ void hilevel_handler_svc( ctx_t* ctx, uint32_t id ) {
   switch( id ) {
     case 0x00 : { // 0x00 => yield()
       multiLevelFeedbackSchedule( ctx );
-
       break;
     }
 
@@ -298,6 +300,11 @@ void hilevel_handler_svc( ctx_t* ctx, uint32_t id ) {
     }
 	
 	case 0x03 : { //0x03 => fork()
+
+	  // print pid of next function
+      PL011_putc( UART0, next_pid, true );
+	  
+
 	  // get unused PCB from procTab
 	  int free_pcb = -1;
 	  for (int i = 0; i < MAX_PROCS; i++) {
@@ -319,17 +326,19 @@ void hilevel_handler_svc( ctx_t* ctx, uint32_t id ) {
   	  procTab[ free_pcb ].pid        = next_pid++;
   	  procTab[ free_pcb ].status     = STATUS_READY;
  	  procTab[ free_pcb ].prty       = 1;
-	  procTab[ free_pcb ].ctx.gpr[0] = 0;
+	  procTab[ free_pcb ].ctx.gpr[0] = 0; // fork() returns 0 to child process
 
+	  // create and place PCB node for new process
 	  enqueue(&mlfq.queues[procTab[free_pcb].prty-1],&procTab[free_pcb]);
 
-	  // if free PCB, copy existing value 
+	  // fork() returns pid to parent process
 	  ctx -> gpr[0] = procTab[free_pcb].pid;
 
+	  // get address of top of new stack space
 	  procTab[free_pcb].tos = getNextStack();
 
+	  // copy stack and correctly place stack pointer
 	  int offset = executing->tos - ctx->sp;
-
 	  procTab[free_pcb].ctx.sp = procTab[free_pcb].tos - offset;
 	  memcpy((uint32_t*) procTab[free_pcb].ctx.sp, (uint32_t*) ctx->sp, offset);
 
@@ -364,10 +373,12 @@ void hilevel_handler_svc( ctx_t* ctx, uint32_t id ) {
 	  int pid = (int)ctx->gpr[0];
 	  int x = (int)ctx->gpr[1];
 
-	  if (pid == 0) { // send signal to all processes
+	  if (pid == 0) { // terminate all processes except console
 		for (int i = 1; i < MAX_PROCS; i++) {
-			// killall
-		}
+		  delPCBNode(&mlfq.queues[procTab[i].prty-1], &procTab[i]); // remove process from queue
+		  memset( &procTab[i], 0, sizeof(pcb_t) ); // reset PCB
+		  procTab[i].status = STATUS_INVALID;	// PCB available to be used		
+		} 
 	  }
 
 	  if (x == 0 | x == 1) { 
@@ -397,7 +408,7 @@ void hilevel_handler_svc( ctx_t* ctx, uint32_t id ) {
 	  break;
 	}
 
-    default   : { // 0x?? => unknown/unsupported
+    default   : {
       break;
     }
   }
@@ -406,18 +417,18 @@ void hilevel_handler_svc( ctx_t* ctx, uint32_t id ) {
 }
 
 void hilevel_handler_irq(ctx_t* ctx) {
-   // Step 2: read  the interrupt identifier so we know the source.
+   // Read  the interrupt identifier so we know the source.
 
    uint32_t id = GICC0->IAR;
 
-   // Step 4: handle the interrupt, then clear (or reset) the source.
+   // Handle the interrupt, then clear source.
 
    if( id == GIC_SOURCE_TIMER0 ) {
 	   multiLevelFeedbackSchedule(ctx);
 	   TIMER0->Timer1IntClr = 0x01;
    }
 
-   // Step 5: write the interrupt identifier to signal we're done.
+   // Write to the interrupt identifier to signal we're done.
 
    GICC0->EOIR = id;
 
