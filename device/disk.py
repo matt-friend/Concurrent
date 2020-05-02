@@ -108,7 +108,7 @@ if ( __name__ == '__main__' ) :
 
   s = socket.socket( socket.AF_INET, socket.SOCK_STREAM )
   
-  s.connect( ( args.host, args.port ) ) ; sd = s.makefile()
+  s.connect( ( args.host, args.port ) ) ; sd = s.makefile(mode='rw')
 
   # read request, process it and write acknowledgement
   
@@ -129,7 +129,7 @@ if ( __name__ == '__main__' ) :
     logging.debug( 'ack = ' + str( ack ) )
 
     if ( len( ack ) > 1 ) :
-      ack = ack[ 0 ] + ' ' + ' '.join( [ binascii.hexlify( x ) for x in ack[ 1 : ] ] )
+      ack = ack[ 0 ] + ' ' + ''.join([ binascii.hexlify( x ) for x in ack[ 1 : ] ] )
     else :
       ack = ack[ 0 ]
 

@@ -19,11 +19,14 @@
  *   to execute.
  */
 
+
 pcb_t procTab[ MAX_PROCS ];        // PCB table
 pcb_t* executing = NULL;           // Pointer to currently executing PCB
 mlf_queues mlfq;                   // Multi-level feedback queue structure
 int next_pid;                      // PID counter to ensure unique PIDs
 bool available_stacks[MAX_PROCS];  // Free stack space table
+
+/* The following functions are related to the scheduling and execution of processes */
 
 // Resume/ begin execution of a process by the processor
 void dispatch( ctx_t* ctx, pcb_t* prev, pcb_t* next ) {
@@ -206,6 +209,72 @@ void initMLFS(ctx_t* ctx) {
   mlfq.timeCount = 0;
 }
 
+/* The following functions are related to the use of the disk */
+
+int 
+
+uint32_t b2u32(uint8_t *in) {
+	uint32_t out = 0;
+	for (int i = 0; i<4; i++) {
+		out = out | ((uint32_t)(in[i]) << i*8);
+	}
+	return out;
+}
+
+uint16_t b2u16(uint8_t *in) {
+	uint16_t out = 0;
+	for (int i = 0; i<2; i++) {
+		out = out | ((uint16_t)(in[i]) << i*8);
+	}
+	return out;
+}
+
+s_block *readInSBlock() {
+	int size = sizeof(s_block);
+	uint8_t data[size];
+	if (DISK_SUCCESS == disk_rd(0, data, size)) {
+		PL011_putc(UART1,'P',true);
+	}
+	else {PL011_putc(UART1,'O',true);}
+
+	s_block *s = malloc(sizeof(s_block));
+   	s->inode_count = data[0];
+	s->root_inode = data[4];
+
+	return s;
+}
+
+uint32_t getInodeCount(){
+	/*s_block *s = readInSBlock();
+	uint32_t y = s->inode_count;
+	free(s);
+*/
+	uint8_t data[4];
+	disk_rd(0,data,4)
+	uint32_t y = data[0];
+	return y;
+}
+
+void writeSBlock(s_block *s) {
+	uint8_t write[BLOCK_SIZE];
+    write[0] = s->inode_count;
+	write[4] = s->root_inode;
+	for (int i = 8; i<BLOCK_SIZE; i++){
+		write[i] = 0;
+	}
+	if (DISK_SUCCESS == disk_wr(0, write, BLOCK_SIZE)) {
+		PL011_putc(UART1,'S',true);
+	}
+	else { PL011_putc(UART1,'N',true);}
+	free(s);
+}
+
+void incInodeCount(){
+	s_block *s = readInSBlock();
+	s->inode_count++;
+ 	writeSBlock(s);
+}	
+
 extern uint32_t p_stack_space;
 extern void main_console();
 
@@ -257,6 +326,11 @@ void hilevel_handler_rst( ctx_t* ctx              ) {
   initMLFS(ctx);
   multiLevelFeedbackSchedule(ctx);  
 
+  incInodeCount();
+  int x = getInodeCount();
+  if (x > 234) { PL011_putc(UART1, 'A', true); }
+
+
   return;
 }
 
@@ -269,6 +343,7 @@ uint32_t getNextStack(){
 		}
 	}
 }
+
 
 void hilevel_handler_svc( ctx_t* ctx, uint32_t id ) { 
   /* Based on the identifier (i.e., the immediate operand) extracted from the
@@ -407,7 +482,23 @@ void hilevel_handler_svc( ctx_t* ctx, uint32_t id ) {
 	  free((uint32_t*)ctx->gpr[0]);	
 	  break;
 	}
+/*	
+	case 0x10 : { // new_inode
 
+	}
+	
+	case 0x11 : { // 
+
+	}
+	
+	case 0x11 : { // open
+
+	}
+
+	case 0x10 : { // mkdir
+
+	}
+*/
     default   : {
       break;
     }

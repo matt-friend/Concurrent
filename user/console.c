@@ -6,6 +6,7 @@
  */
 
 #include "console.h"
+#include "disk.h"
 
 /* The following functions are special-case versions of a) writing, and 
  * b) reading a string from the UART (the latter case returning once a 

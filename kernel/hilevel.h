@@ -21,6 +21,7 @@
 #include   "GIC.h"
 #include "PL011.h"
 #include "SP804.h"
+#include "disk.h"
 
 // Include functionality relating to the   kernel.
 
@@ -43,6 +44,7 @@
 #define MAX_PROCS 20 
 #define PRIORITY_LEVELS 3
 #define STACK_SIZE 0x1000
+#define BLOCK_SIZE 512
 
 typedef int pid_t;
 typedef int prty_t;
