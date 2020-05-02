@@ -211,8 +211,7 @@ void initMLFS(ctx_t* ctx) {
 
 /* The following functions are related to the use of the disk */
 
-int 
-
+// convert 4 bytes to uint32
 uint32_t b2u32(uint8_t *in) {
 	uint32_t out = 0;
 	for (int i = 0; i<4; i++) {
@@ -221,6 +220,7 @@ uint32_t b2u32(uint8_t *in) {
 	return out;
 }
 
+// convert 2 bytes to uint16
 uint16_t b2u16(uint8_t *in) {
 	uint16_t out = 0;
 	for (int i = 0; i<2; i++) {
@@ -229,6 +229,7 @@ uint16_t b2u16(uint8_t *in) {
 	return out;
 }
 
+// read in a super block struct
 s_block *readInSBlock() {
 	int size = sizeof(s_block);
 	uint8_t data[size];
@@ -244,17 +245,19 @@ s_block *readInSBlock() {
 	return s;
 }
 
+// retrieve the inode count stored in the sblock
 uint32_t getInodeCount(){
 	/*s_block *s = readInSBlock();
 	uint32_t y = s->inode_count;
 	free(s);
 */
 	uint8_t data[4];
-	disk_rd(0,data,4)
+	disk_rd(0,data,4);
 	uint32_t y = data[0];
 	return y;
 }
 
+// write an sblock struct to the sblock on disk
 void writeSBlock(s_block *s) {
 	uint8_t write[BLOCK_SIZE];
     write[0] = s->inode_count;
@@ -269,6 +272,7 @@ void writeSBlock(s_block *s) {
 	free(s);
 }
 
+// increment the inode count in the disk sblock
 void incInodeCount(){
 	s_block *s = readInSBlock();
 	s->inode_count++;
@@ -325,11 +329,6 @@ void hilevel_handler_rst( ctx_t* ctx              ) {
   // Initialise the feedback queue and start scheduling
   initMLFS(ctx);
   multiLevelFeedbackSchedule(ctx);  
-
-  incInodeCount();
-  int x = getInodeCount();
-  if (x > 234) { PL011_putc(UART1, 'A', true); }
-
 
   return;
 }
